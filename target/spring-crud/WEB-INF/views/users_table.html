@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/xlink">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        form div {
+            margin: 5px 0;
+        }
+        h2 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <table style="display: inline-block; width: 35%; float: left;">
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Year of birth</th>
+        </tr>
+        <tr th:each="user: ${users_list}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastname()}"></td>
+            <td th:text="${user.getYearOfBirth()}"></td>
+        </tr>
+    </table>
+<div style="display: inline-block; width: 65%; left: 65%;">
+    <form th:method="POST" th:action="@{/users}" th:object="${user_add}">
+        <h2>Add new user</h2>
+        <div>
+        <label for="name_add">Fill username:</label>
+        <input type="text" th:field="*{name}" id="name_add">
+        </div>
+        <div>
+        <label for="lastname_add">Fill lastname:</label>
+        <input type="text" th:field="*{lastname}" id="lastname_add">
+        </div>
+        <div>
+        <label for="yearOfBerth_add">Fill year of birth:</label>
+        <input type="text" th:field="*{yearOfBirth}" id="yearOfBerth_add">
+        </div>
+        <input type="submit" value="Add user">
+    </form>
+
+
+    <form th:method="PATCH" th:action="@{/users}" th:object="${user_update}" style="position: relative;">
+        <h2>Update user</h2>
+        <div>
+        <label for="id_patch">Fill id:</label>
+        <input name="id_patch" th:field="*{id}" id="id_patch">
+        </div>
+        <div>
+        <label for="name_add">Fill username:</label>
+        <input type="text" th:field="*{name}" id="name_patch">
+        </div>
+        <div>
+        <label for="lastname_add">Fill lastname:</label>
+        <input type="text" th:field="*{lastname}" id="lastname_patch">
+        </div>
+        <div>
+        <label for="yearOfBerth_add">Fill year of birth:</label>
+        <input type="text" th:field="*{yearOfBirth}" id="yearOfBerth_patch">
+        </div>
+        <input type="submit" value="Update user">
+    </form>
+
+    <form th:method="DELETE" th:action="@{/users}" style="position: relative;">
+        <h2>Remove user with id</h2>
+        <div>
+        <label for="user_id">Fill id:</label>
+        <input name="user_id" type="text" id="user_id">
+        </div>
+        <input type="submit" value="Remove user">
+    </form>
+</div>
+
+</body>
+</html>
