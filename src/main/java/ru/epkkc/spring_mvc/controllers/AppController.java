@@ -42,21 +42,21 @@ public class AppController {
     }
 
     @PostMapping()
-    public RedirectView addUser(@ModelAttribute(name = "user_add") User user) {
+    public String addUser(@ModelAttribute(name = "user_add") User user) {
         userService.add(user);
-        return new RedirectView("http://localhost:8080/users");
+        return "redirect:/users";
     }
 
     @PatchMapping()
-    public RedirectView patchUser(@ModelAttribute(name = "user_update") User user) {
+    public String patchUser(@ModelAttribute(name = "user_update") User user) {
         userService.updateUser(user);
-        return new RedirectView("http://localhost:8080/users");
+        return "redirect:/users";
     }
 
     @DeleteMapping()
-    public RedirectView removeUser(@RequestParam(name = "user_id") Long id) {
+    public String removeUser(@RequestParam(name = "user_id") Long id) {
         userService.remove(id);
-        return new RedirectView("http://localhost:8080/users");
+        return "redirect:/users";
     }
 
 }
