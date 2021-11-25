@@ -10,18 +10,18 @@ import javax.annotation.PostConstruct;
 @Service
 public class TestUsersService {
 
-    UserDaoInt dao;
+    private UserServiceInt userService;
 
     @Autowired
-    public TestUsersService(UserDaoInt dao) {
-        this.dao = dao;
+    public TestUsersService(UserServiceInt userService) {
+        this.userService = userService;
     }
 
     @PostConstruct
     public void postConstruct() {
-        dao.add(new User("name1", "lastname1", (short) 2001));
-        dao.add(new User("name2", "lastname2", (short) 2002));
-        dao.add(new User("name3", "lastname3", (short) 2003));
-        dao.add(new User("name4", "lastname4", (short) 2004));
+        userService.add(new User("name1", "lastname1", (short) 2001));
+        userService.add(new User("name2", "lastname2", (short) 2002));
+        userService.add(new User("name3", "lastname3", (short) 2003));
+        userService.add(new User("name4", "lastname4", (short) 2004));
     }
 }

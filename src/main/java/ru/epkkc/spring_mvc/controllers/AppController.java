@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.epkkc.spring_mvc.dao.UserDaoInt;
 import ru.epkkc.spring_mvc.model.User;
+import ru.epkkc.spring_mvc.services.UserServiceInt;
 
 import java.util.List;
 
@@ -20,16 +20,16 @@ import java.util.List;
 @RequestMapping("/users")
 public class AppController {
 
-    UserDaoInt dao;
+    private UserServiceInt userService;
 
     @Autowired
-    public AppController(UserDaoInt dao) {
-        this.dao = dao;
+    public AppController(UserServiceInt userService) {
+        this.userService = userService;
     }
 
     @GetMapping()
     public String usersTable(ModelMap model) {
-        List<User> allUsers = dao.getAllUsers();
+        List<User> allUsers = userService.getAllUsers();
 
         for (User user : allUsers) {
             System.out.println(user);
@@ -43,19 +43,19 @@ public class AppController {
 
     @PostMapping()
     public RedirectView addUser(@ModelAttribute(name = "user_add") User user) {
-        dao.add(user);
+        userService.add(user);
         return new RedirectView("http://localhost:8080/users");
     }
 
     @PatchMapping()
     public RedirectView patchUser(@ModelAttribute(name = "user_update") User user) {
-        dao.updateUser(user);
+        userService.updateUser(user);
         return new RedirectView("http://localhost:8080/users");
     }
 
     @DeleteMapping()
     public RedirectView removeUser(@RequestParam(name = "user_id") Long id) {
-        dao.remove(id);
+        userService.remove(id);
         return new RedirectView("http://localhost:8080/users");
     }
 

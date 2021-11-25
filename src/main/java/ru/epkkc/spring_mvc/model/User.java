@@ -41,12 +41,6 @@ public class User {
                 + ", year = " + yearOfBirth;
     }
 
-    public void updateUser(User user){
-        if (!user.getName().isEmpty()) this.name = user.getName();
-        if (!user.getLastname().isEmpty()) this.lastname = user.getLastname();
-        if (user.getYearOfBirth() > 0) this.yearOfBirth = user.getYearOfBirth();
-    }
-
     public String getName() {
         return name;
     }
